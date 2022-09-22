@@ -1,0 +1,16 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <h3 class="text-xl tracking-light font-bold leading-none text-gray-100 pb-6"><i class="fas fa-bomb text-xl mr-2 text-red-600"></i> Page not found</h3>
+            
+            <p class="text-gray-200 text-pink-100 pl-5 border-l-4 border-pink-500">
+                You found a way to enter a zone nobody dares coming before! 
+            </p>
+        </LayoutView>
+    </NotFound>
+</Router>

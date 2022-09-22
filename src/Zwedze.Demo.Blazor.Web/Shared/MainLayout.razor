@@ -1,0 +1,16 @@
+﻿@inherits LayoutComponentBase
+
+<div class="min-h-screen bg-gray-900 font-sans leading-normal tracking-normal">
+    <div class="flex md:flex-row-reverse flex-wrap">
+
+        <!--Main Content-->
+        <div class="w-full md:w-4/5">
+            <div class="container pt-16 px-6">
+                @Body
+            </div>
+        </div>
+
+        <!--Sidebar-->
+        <Menu></Menu>
+    </div>
+</div>

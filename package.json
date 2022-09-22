@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
+  },
+  "scripts": {
+    "buildcss": "npx tailwindcss -i ./src/Zwedze.Demo.Blazor.Web/wwwroot/css/app.css -o ./src/Zwedze.Demo.Blazor.Web/wwwroot/css/app.min.css --minify",
+    "watchcss": "npx tailwindcss -i ./src/Zwedze.Demo.Blazor.Web/wwwroot/css/app.css -o ./src/Zwedze.Demo.Blazor.Web/wwwroot/css/app.min.css --minify --watch"
+  }
+}

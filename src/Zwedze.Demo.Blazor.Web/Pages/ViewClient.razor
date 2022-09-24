@@ -1,0 +1,51 @@
+@inject IClientApiProvider ClientApiProvider
+@inject IInvoiceApiProvider InvoiceApiProvider
+
+@page "/clients/{id:long}"
+@using Zwedze.Demo.Blazor.Web.Providers
+
+<PageTitle>Blazor Demo :: @(_client?.Name ?? "Clients")</PageTitle>
+
+@if (_client == default)
+{
+    <h3 class="text-xl tracking-light font-bold leading-none text-gray-100 pb-6"><i class="fas fa-bomb text-xl mr-2 text-red-600"></i> Client not found</h3>
+
+    <p class="text-gray-200 text-pink-100 pl-5 border-l-4 border-pink-500">
+        You found a way to enter a zone nobody dares coming before!
+    </p>
+}
+else
+{
+    <h3 class="text-xl tracking-light font-bold leading-none text-gray-100 pb-2 mb-4 border-b-2 border-b-pink-500">@_client.Name</h3>
+
+    // Client information
+    <h3 class="text-2xl text-gray-200 tracking-wider mb-6">Information</h3>
+    <div class="grid grid-cols-3 gap-4 mb-4">
+        <div class="bg-gray-700 text-white p-4">
+            <h3 class="text-2xl tracking-wider mb-6">@_client.Name</h3>
+            <div class="mb-2">
+                <span class="font-bold">@_client.Phone</span>
+            </div>
+            <Button Type="Button.ButtonType.Success" HasText="true" Rounded="true">
+                <Content>
+                    <i class="fas fa-phone"></i> Call
+                </Content>
+            </Button>
+        </div>
+        <div class="bg-gray-700 text-white p-4">
+            <h3 class="block text-xl tracking-wider mb-6">Address</h3>
+            <div class="mb-2">
+                <div class="block">
+                    @_client.Address.City (@_client.Address.PostCode) - @_client.Address.Country
+                </div>
+                <div class="block">
+                    @_client.Address.StreetNumber, @_client.Address.Street
+                </div>
+            </div>
+        </div>
+    </div>
+
+    // Invoices
+    <h3 class="text-2xl text-gray-200 tracking-wider mb-6">Invoices</h3>
+    <InvoiceTable Invoices="_invoices"></InvoiceTable>
+}

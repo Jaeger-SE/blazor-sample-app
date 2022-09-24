@@ -1,0 +1,73 @@
+<button type="button"
+        class="inline-block @GetRounded() @GetColors() @GetSize() leading-normal uppercase shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
+        @onclick="@OnClick">
+    @Content
+</button>
+
+@code {
+
+    public enum ButtonType
+    {
+        Primary,
+        Secondary,
+        Success,
+        Danger,
+        Warning,
+        Info,
+        Light,
+        Dark,
+        Link
+    }
+
+    string GetColors()
+    {
+        switch (Type)
+        {
+            case null:
+            case ButtonType.Primary:
+                return "bg-blue-400 text-white hover:bg-blue-500 focus:bg-blue-500 active:bg-red-800";
+            case ButtonType.Secondary:
+                return "bg-pink-500 text-white hover:bg-pink-600 focus:bg-pink-600 active:bg-red-800";
+            case ButtonType.Success:
+                return "bg-green-400 text-white hover:bg-green-500 focus:bg-green-500 active:bg-red-800";
+            case ButtonType.Danger:
+                return "bg-red-400 text-white hover:bg-red-500 focus:bg-red-500 active:bg-red-800";
+            case ButtonType.Warning:
+                return "bg-yellow-400 text-white hover:bg-yellow-500 focus:bg-yellow-500 active:bg-red-800";
+            case ButtonType.Info:
+                return "bg-blue-200 text-white hover:bg-blue-300 focus:bg-blue-300 active:bg-red-800";
+            case ButtonType.Light:
+                return "bg-gray-200 text-gray-700 hover:bg-gray-300 focus:bg-gray-300 active:bg-red-800";
+            case ButtonType.Dark:
+                return "bg-gray-800 text-white hover:bg-gray-900 focus:bg-gray-900 active:bg-red-800";
+            case ButtonType.Link:
+                return "bg-transparent text-blue-400 hover:text-blue-500 focus:bg-blue-500 active:bg-red-800";
+        }
+        throw new ArgumentOutOfRangeException();
+    }
+
+    string GetRounded()
+    {
+        return Rounded ? "rounded-full" : "rounded";
+    }
+
+    string GetSize()
+    {
+        return HasText ? "px-6 py-2.5 uppercase font-medium text-xs leading-tight" : "w-9 h-9";
+    }
+
+    [Parameter]
+    public RenderFragment? Content { get; set; }
+    
+    [Parameter]
+    public ButtonType? Type { get; set; } = ButtonType.Primary;
+
+    [Parameter]
+    public bool Rounded { get; set; }
+    
+    [Parameter]
+    public bool HasText { get; set; }
+    
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+}

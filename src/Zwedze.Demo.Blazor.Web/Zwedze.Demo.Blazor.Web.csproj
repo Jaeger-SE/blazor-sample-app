@@ -18,7 +18,7 @@
 
     <ItemGroup>
       <Compile Update="Pages\ListClients.cs">
-        <DependentUpon>Clients.razor</DependentUpon>
+        <DependentUpon>ListClients.razor</DependentUpon>
       </Compile>
       <Compile Update="Pages\ListInvoices.cs">
         <DependentUpon>ListInvoices.razor</DependentUpon>
@@ -26,12 +26,28 @@
       <Compile Update="Components\ConfirmationModal.cs">
         <DependentUpon>ConfirmationModal.razor</DependentUpon>
       </Compile>
+      <Compile Update="Components\Clients\CreateClient.cs">
+        <DependentUpon>CreateClient.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\ViewClient.cs">
+        <DependentUpon>ViewClient.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Components\Invoices\InvoiceTable.cs">
+        <DependentUpon>InvoiceTable.razor</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
       <Content Update="wwwroot\appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Index.razor" />
+      <_ContentIncludedByDefault Remove="Pages\ListClients.razor" />
+      <_ContentIncludedByDefault Remove="Pages\ListInvoices.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Test.razor" />
     </ItemGroup>
 
 </Project>

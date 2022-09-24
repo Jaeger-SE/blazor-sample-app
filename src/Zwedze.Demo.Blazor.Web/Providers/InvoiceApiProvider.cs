@@ -6,7 +6,8 @@ namespace Zwedze.Demo.Blazor.Web.Providers;
 public interface IInvoiceApiProvider
 {
     Task<Invoice?> GetById(InvoiceId invoiceId);
-    Task<Invoice[]> GetList();
+    Task<Invoice[]> GetClientInvoiceList(ClientId clientId, int? page = 0, int? pageSize = 20);
+    Task<Invoice[]> GetList(int? page = 0, int? pageSize = 20);
 }
 
 internal class InvoiceApiProvider : IInvoiceApiProvider
@@ -23,9 +24,15 @@ internal class InvoiceApiProvider : IInvoiceApiProvider
         return _httpClient.GetFromJsonAsync<Invoice>($"api/invoice/{invoiceId.Id}");
     }
 
-    public async Task<Invoice[]> GetList()
+    public async Task<Invoice[]> GetClientInvoiceList(ClientId clientId, int? page = 0, int? pageSize = 20)
     {
-        var list = await _httpClient.GetFromJsonAsync<Invoice[]>("api/invoice/list");
+        var list = await _httpClient.GetFromJsonAsync<Invoice[]>($"api/invoice/list/{clientId.Id}?page={page}&pageSize={pageSize}");
+        return list ?? Array.Empty<Invoice>();
+    }
+
+    public async Task<Invoice[]> GetList(int? page = 0, int? pageSize = 20)
+    {
+        var list = await _httpClient.GetFromJsonAsync<Invoice[]>($"api/invoice/list?page={page}&pageSize={pageSize}");
         return list ?? Array.Empty<Invoice>();
     }
 }

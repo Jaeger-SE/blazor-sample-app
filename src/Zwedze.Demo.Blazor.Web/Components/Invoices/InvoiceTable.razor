@@ -1,0 +1,35 @@
+<div class="overflow-x-auto relative">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th class="py-3 px-6">Client</th>
+            <th class="py-3 px-6">Issue on</th>
+            <th class="py-3 px-6">Due to</th>
+            <th class="py-3 px-6">Amount</th>
+            <th class="py-3 px-6"># Rows</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var invoice in _invoiceTableModels)
+        {
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    @invoice.Client.Name
+                </th>
+                <td class="py-4 px-6">
+                    @invoice.IssueDate
+                </td>
+                <td class="py-4 px-6">
+                    @invoice.DueDate
+                </td>
+                <td class="py-4 px-6">
+                    @invoice.TotalAmount
+                </td>
+                <td class="py-4 px-6">
+                    @invoice.Rows.Length
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

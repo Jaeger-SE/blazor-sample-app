@@ -1,46 +1,16 @@
-using System.Collections.Concurrent;
+using Microsoft.AspNetCore.Components;
 using Zwedze.Demo.Blazor.Contracts;
+using Zwedze.Demo.Blazor.Web.Providers;
 
 namespace Zwedze.Demo.Blazor.Web.Pages;
 
 public partial class ListInvoices
 {
-    private InvoiceTableRecord[] _invoiceModels = Array.Empty<InvoiceTableRecord>();
+    private Invoice[] _invoices = Array.Empty<Invoice>();
+    [Inject] public IInvoiceApiProvider InvoiceApiProvider { get; set; } = default!; //Using [Inject] we expect a non-null return
 
     protected override async Task OnInitializedAsync()
     {
-        var invoices = await InvoiceApiProvider.GetList();
-        var invoiceRecords = new ConcurrentBag<InvoiceTableRecord>();
-
-        await Parallel.ForEachAsync(invoices, async (invoice, _) =>
-        {
-            var client = await ClientApiProvider.GetById(invoice.ClientId);
-            if (client == null) throw new ApplicationException($"Invoice #{invoice.InvoiceId.Id:D} has no client!");
-            invoiceRecords.Add(new InvoiceTableRecord(invoice.InvoiceId, client, invoice.TotalAmount, invoice.Rows,
-                invoice.IssueDate, invoice.DueDate));
-        });
-
-        _invoiceModels = invoiceRecords.ToArray();
+        _invoices = await InvoiceApiProvider.GetList();
     }
-}
-
-internal record InvoiceTableRecord
-{
-    public InvoiceTableRecord(InvoiceId invoiceId, Client client, double totalAmount, InvoiceRow[] rows,
-        DateTimeOffset issueDate, DateTimeOffset dueDate)
-    {
-        InvoiceId = invoiceId;
-        Client = client;
-        TotalAmount = totalAmount;
-        Rows = rows;
-        IssueDate = issueDate;
-        DueDate = dueDate;
-    }
-
-    public InvoiceId InvoiceId { get; }
-    public Client Client { get; }
-    public double TotalAmount { get; }
-    public InvoiceRow[] Rows { get; }
-    public DateTimeOffset IssueDate { get; }
-    public DateTimeOffset DueDate { get; }
 }

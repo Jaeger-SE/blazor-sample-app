@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.1.8",
+    "tw-elements": "^1.0.0-alpha12"
   },
   "scripts": {
     "buildcss": "npx tailwindcss -i ./src/Zwedze.Demo.Blazor.Web/wwwroot/css/app.css -o ./src/Zwedze.Demo.Blazor.Web/wwwroot/css/app.min.css --minify",

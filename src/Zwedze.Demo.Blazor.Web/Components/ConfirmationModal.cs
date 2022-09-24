@@ -13,7 +13,7 @@ public partial class ConfirmationModal
     {
         _isModalVisible = false;
     }
-
+    
     private void Ok()
     {
         _isModalVisible = false;
